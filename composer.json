@@ -37,9 +37,5 @@
             "src/Kernel/Support/Helpers.php",
             "src/Kernel/Helpers.php"
         ]
-    },
-    "autoload-dev": {
-        "psr-4": {
-        }
     }
 }

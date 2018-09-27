@@ -11,7 +11,6 @@
 
 namespace BaseSdk\Kernel;
 
-use BaseSdk\Kernel\Contracts\AccessTokenInterface;
 use BaseSdk\Kernel\Http\Response;
 use BaseSdk\Kernel\Traits\HasHttpRequests;
 use GuzzleHttp\Client;
@@ -37,10 +36,6 @@ class BaseClient
      */
     protected $app;
 
-    /**
-     * @var \BaseSdk\Kernel\Contracts\AccessTokenInterface
-     */
-    protected $accessToken;
 
     /**
      * @var
@@ -51,12 +46,10 @@ class BaseClient
      * BaseClient constructor.
      *
      * @param \BaseSdk\Kernel\ServiceContainer $app
-     * @param \BaseSdk\Kernel\Contracts\AccessTokenInterface|null $accessToken
      */
-    public function __construct(ServiceContainer $app, AccessTokenInterface $accessToken = null)
+    public function __construct(ServiceContainer $app)
     {
         $this->app = $app;
-        $this->accessToken = $accessToken ?? $this->app['access_token'];
     }
 
     /**
@@ -139,26 +132,6 @@ class BaseClient
             'timeout'         => 30,
             'read_timeout'    => 30,
         ]);
-    }
-
-    /**
-     * @return AccessTokenInterface
-     */
-    public function getAccessToken(): AccessTokenInterface
-    {
-        return $this->accessToken;
-    }
-
-    /**
-     * @param \BaseSdk\Kernel\Contracts\AccessTokenInterface $accessToken
-     *
-     * @return $this
-     */
-    public function setAccessToken(AccessTokenInterface $accessToken)
-    {
-        $this->accessToken = $accessToken;
-
-        return $this;
     }
 
     /**
